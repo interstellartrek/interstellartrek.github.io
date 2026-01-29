@@ -1,0 +1,80 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+// 在这里修改你的项目数据
+const projects = [
+  { 
+    name: "Achievement System", 
+    desc: "A personal website built with Astro & Tailwind CSS to track life achievements.", 
+    year: "2026", 
+    url: "https://github.com/你的用户名/你的仓库",
+    tag: "Web Dev"
+  },
+  { 
+    name: "Physics Engine Demo", 
+    desc: "A simple 2D physics simulation written in Python.", 
+    year: "2025", 
+    url: "#",
+    tag: "Python"
+  },
+  { 
+    name: "AI Chatbot", 
+    desc: "Fine-tuning LLaMA model for personal assistant.", 
+    year: "2024", 
+    url: "#",
+    tag: "AI"
+  },
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Projects - ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+	</head>
+	<body class="bg-[#111] text-gray-300 antialiased font-sans">
+		<div class="max-w-screen-xl mx-auto px-6 py-12 md:py-20 grid grid-cols-1 md:grid-cols-4 gap-12">
+			
+            <!-- ================= 左侧边栏 ================= -->
+			<aside class="md:col-span-1 space-y-8">
+				<div>
+                    <div class="w-16 h-16 rounded-full overflow-hidden mb-4 grayscale hover:grayscale-0 transition duration-500">
+					    <img src="https://github.com/你的GitHub用户名.png" alt="Avatar" class="w-full h-full object-cover" />
+                    </div>
+					<h1 class="text-xl font-bold text-white tracking-tight">Your Name</h1>
+                    <p class="text-gray-400 text-sm font-mono mt-1">@your_nickname</p>
+				</div>
+                <nav>
+                    <ul class="space-y-2 text-sm text-gray-500 font-medium">
+                        <li><a href="/" class="hover:text-white transition">Home</a></li>
+                        <li><a href="/about" class="hover:text-white transition">About</a></li>
+                        <li><a href="/blog" class="hover:text-white transition">Writing</a></li>
+                        <!-- 高亮 Projects -->
+                        <li><a href="/projects" class="text-white">Projects</a></li>
+                    </ul>
+                </nav>
+			</aside>
+
+            <!-- ================= 右侧 Projects 内容 ================= -->
+			<main class="md:col-span-3">
+                <h1 class="text-3xl font-bold text-white mb-8 tracking-tight">Projects</h1>
+                
+                <div class="grid gap-4">
+                    {projects.map((project) => (
+                        <a href={project.url} target="_blank" class="group block p-6 border border-gray-800 bg-white/5 rounded-lg hover:border-gray-600 hover:bg-white/10 transition">
+                            <div class="flex flex-col md:flex-row md:justify-between md:items-baseline gap-2 mb-2">
+                                <h3 class="text-xl font-bold text-gray-200 group-hover:text-white transition">{project.name}</h3>
+                                <div class="flex items-center gap-3">
+                                    <span class="text-xs font-mono text-green-500 border border-green-900 bg-green-900/20 px-2 py-0.5 rounded">{project.tag}</span>
+                                    <span class="text-sm font-mono text-gray-500">{project.year}</span>
+                                </div>
+                            </div>
+                            <p class="text-gray-400 group-hover:text-gray-300">{project.desc}</p>
+                        </a>
+                    ))}
+                </div>
+			</main>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,118 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+// 模拟一些项目数据（你可以改成你真实的）
+const projects = [
+  { name: "Personal Website", desc: "Built with Astro & Tailwind", year: "2026", url: "#" },
+  { name: "Achievement System", desc: "Tracking life goals", year: "2025", url: "#" },
+  { name: "Deep Learning Demo", desc: "Pytorch experiments", year: "2024", url: "#" },
+];
+
+// 模拟一些文章数据
+const writings = [
+  { title: "Building a digital garden", date: "Jan 2026", url: "/blog/first-post" },
+  { title: "Notes on System Design", date: "Dec 2025", url: "#" },
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body class="bg-[#111] text-gray-300 antialiased">
+        
+        <!-- 核心布局：大屏幕双栏，小屏幕单栏 -->
+		<div class="max-w-screen-xl mx-auto px-6 py-12 md:py-20 grid grid-cols-1 md:grid-cols-4 gap-12">
+			
+            <!-- 左侧边栏 (Sidebar) -->
+			<aside class="md:col-span-1 space-y-8">
+                <!-- 头像与名字 -->
+				<div>
+                    <div class="w-16 h-16 rounded-full overflow-hidden mb-4 grayscale hover:grayscale-0 transition duration-500">
+                        <!-- 请替换成你的头像链接 -->
+					    <img src="https://github.com/interstellartrek.png" alt="Avatar" class="w-full h-full object-cover" />
+                    </div>
+					<h1 class="text-xl font-bold text-white tracking-tight">Zehao Yu</h1>
+                    <p class="text-gray-500 text-sm mt-1">interstellartrek</p>
+				</div>
+
+                <!-- 导航菜单 -->
+                <nav>
+                    <ul class="space-y-2 text-sm text-gray-500 font-medium">
+                        <li><a href="/" class="text-white">Home</a></li>
+                        <li><a href="/about" class="hover:text-white transition">About</a></li>
+                        <li><a href="/blog" class="hover:text-white transition">Writing</a></li>
+                        <li><a href="https://github.com" target="_blank" class="hover:text-white transition">Projects</a></li>
+                    </ul>
+                </nav>
+
+                <!-- 社交链接 -->
+                <div class="space-y-2 text-sm text-gray-500">
+                    <p class="text-xs font-bold text-gray-600 uppercase tracking-wider mb-2">Socials</p>
+                    <ul class="space-y-1">
+                        <li><a href="https://github.com/interstellartrek" class="hover:text-white transition flex items-center gap-2">GitHub ↗</a></li>
+                        <li><a href="https://twitter.com/你的推特" class="hover:text-white transition flex items-center gap-2">Twitter ↗</a></li>
+                        <li><a href="mailto:125090888@link.cuhk.edu.cn" class="hover:text-white transition flex items-center gap-2">Email ↗</a></li>
+                    </ul>
+                </div>
+			</aside>
+
+            <!-- 右侧主要内容 (Main Content) -->
+			<main class="md:col-span-3 space-y-16">
+				
+                <!-- 简介部分 -->
+				<section class="max-w-2xl">
+					<p class="text-lg leading-relaxed text-gray-300 mb-6">
+						Hello, I'm a student in Chinese University of HongKong. I love playing with math and exploring the frontiers of AI. 
+					</p>
+                    <p class="text-gray-400 leading-relaxed">
+                        Currently, I'm focusing on <span class="text-white">Mathematical Analysis</span> and <span class="text-white">Algebraic Geometry</span>. This website serves as my digital garden where I document my achievements and learning process.
+                    </p>
+                    <!-- 动态状态指示器 -->
+                    <div class="mt-6 flex items-center gap-2 text-sm text-gray-500">
+                        <span class="relative flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                        </span>
+                        Open to collaborations
+                    </div>
+				</section>
+
+                <!-- 选定项目 (Selected Projects) - 复刻原站的列表风格 -->
+                <section>
+                    <h2 class="text-sm font-bold text-gray-200 mb-6 uppercase tracking-wider">Selected Projects</h2>
+                    <div class="space-y-0">
+                        {projects.map((project) => (
+                            <a href={project.url} class="group block py-4 border-t border-gray-800 hover:bg-white/5 transition -mx-4 px-4 rounded-lg">
+                                <div class="flex justify-between items-baseline">
+                                    <h3 class="font-medium text-gray-200 group-hover:text-white transition">{project.name}</h3>
+                                    <span class="text-gray-600 text-sm font-mono">{project.year}</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">{project.desc}</p>
+                            </a>
+                        ))}
+                    </div>
+                </section>
+
+                <!-- 写作列表 (Writing) -->
+                <section>
+                    <h2 class="text-sm font-bold text-gray-200 mb-6 uppercase tracking-wider">Writing</h2>
+                    <div class="space-y-0">
+                        {writings.map((post) => (
+                            <a href={post.url} class="group block py-3 border-t border-gray-800 hover:text-white transition flex justify-between items-baseline">
+                                <span class="text-gray-400 group-hover:text-white transition">{post.title}</span>
+                                <span class="text-gray-600 text-sm">{post.date}</span>
+                            </a>
+                        ))}
+                        <div class="pt-4">
+                            <a href="/blog" class="text-sm text-gray-500 hover:text-white underline decoration-gray-700 underline-offset-4">View all posts -></a>
+                        </div>
+                    </div>
+                </section>
+
+			</main>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,77 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`About - ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+	</head>
+	<body class="bg-[#111] text-gray-300 antialiased font-sans">
+        
+        <!-- 这里和首页一样的布局结构 -->
+		<div class="max-w-screen-xl mx-auto px-6 py-12 md:py-20 grid grid-cols-1 md:grid-cols-4 gap-12">
+			
+            <!-- ================= 左侧边栏 (和你首页保持一致) ================= -->
+			<aside class="md:col-span-1 space-y-8">
+				<div>
+                    <div class="w-16 h-16 rounded-full overflow-hidden mb-4 grayscale hover:grayscale-0 transition duration-500">
+                        <!-- 记得改成你的 GitHub 用户名 -->
+					    <img src="https://github.com/interstellartrek.png" alt="Avatar" class="w-full h-full object-cover" />
+                    </div>
+					<h1 class="text-xl font-bold text-white tracking-tight">Zehao Yu</h1>
+                    <p class="text-gray-500 text-sm mt-2">interstellartrek</p>
+				</div>
+
+                <!-- 导航菜单 -->
+                <nav>
+                    <ul class="space-y-2 text-sm text-gray-500 font-medium">
+                        <li><a href="/" class="hover:text-white transition">Home</a></li>
+                        <!-- 当前在 About 页，所以给 About 加亮（text-white） -->
+                        <li><a href="/about" class="text-white">About</a></li>
+                        <li><a href="/blog" class="hover:text-white transition">Writing</a></li>
+                        <li><a href="https://github.com" target="_blank" class="hover:text-white transition">Projects</a></li>
+                    </ul>
+                </nav>
+
+                <div class="space-y-2 text-sm text-gray-500">
+                    <p class="text-xs font-bold text-gray-600 uppercase tracking-wider mb-2">Socials</p>
+                    <ul class="space-y-1">
+                        <li><a href="#" class="hover:text-white transition">GitHub ↗</a></li>
+                        <li><a href="#" class="hover:text-white transition">Twitter ↗</a></li>
+                        <li><a href="#" class="hover:text-white transition">Email ↗</a></li>
+                    </ul>
+                </div>
+			</aside>
+
+            <!-- ================= 右侧主要内容 (About 的正文) ================= -->
+			<main class="md:col-span-3">
+                <h1 class="text-3xl font-bold text-white mb-8 tracking-tight">About Me</h1>
+                
+                <!-- 文章内容区域，使用 prose 样式让文字排版更好看 -->
+				<article class="prose prose-invert prose-gray max-w-none">
+					<p class="text-lg leading-relaxed text-gray-300">
+						Hi, I'm a developer based in ... 
+					</p>
+                    
+                    <p>
+                        I started coding when I was ...
+                    </p>
+
+                    <h3>My Tech Stack</h3>
+                    <ul>
+                        <li>JavaScript / TypeScript</li>
+                        <li>React / Astro</li>
+                        <li>Python / PyTorch</li>
+                    </ul>
+
+                    <h3>Goals</h3>
+                    <p>
+                        Currently, I am focusing on building my own digital garden and learning deep learning.
+                    </p>
+				</article>
+			</main>
+		</div>
+	</body>
+</html>
