@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
   background-color: #111111; /* 极深的灰色，比纯黑更有质感 */
