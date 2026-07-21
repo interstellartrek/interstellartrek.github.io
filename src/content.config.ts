@@ -1,19 +1,28 @@
 import { defineCollection, z } from 'astro:content';
-import { glob } from 'astro/loaders';
 
-const blog = defineCollection({
-	// Load Markdown and MDX files in the `src/content/blog/` directory.
-	loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
-	// Type-check frontmatter using a schema
-	schema: ({ image }) =>
-		z.object({
-			title: z.string(),
-			description: z.string(),
-			// Transform string to Date object
-			pubDate: z.coerce.date(),
-			updatedDate: z.coerce.date().optional(),
-			heroImage: image().optional(),
-		}),
+const blogSchema = z.object({
+	title: z.string(),
+	description: z.string(),
+	pubDate: z.coerce.date(),
+	updatedDate: z.coerce.date().optional(),
+	heroImage: z.string().optional(),
+	// homework 专用：用于区分代数、线代、范畴论
+	subject: z.enum(['abstract-algebra', 'linear-algebra', 'category-theory']).optional(),
 });
 
-export const collections = { blog };
+const blog = defineCollection({
+	type: 'content',
+	schema: blogSchema,
+});
+
+const homework = defineCollection({
+	type: 'content',
+	schema: blogSchema,
+});
+
+const note = defineCollection({
+	type: 'content',
+	schema: blogSchema,
+});
+
+export const collections = { blog, homework, note };
