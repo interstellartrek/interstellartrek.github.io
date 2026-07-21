@@ -10,10 +10,25 @@ const projects = [
 ];
 
 // 模拟一些文章数据
-const writings = [
-  { title: "Building a digital garden", date: "Jan 2026", url: "/blog/first-post" },
-  { title: "Notes on System Design", date: "Dec 2025", url: "#" },
-];
+
+import { getCollection } from 'astro:content';
+// ... 其他 import ...
+
+// 获取 homework 板块最新的 3 篇文章
+const homeworkPosts = (await getCollection('homework'))
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    .slice(0, 3);
+
+// 获取 note 板块最新的 3 篇文章
+const notePosts = (await getCollection('note'))
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    .slice(0, 3);
+
+// 获取 blog 板块最新的 3 篇文章
+const blogPosts = (await getCollection('blog'))
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    .slice(0, 3);
+
 ---
 
 <!doctype html>
@@ -97,20 +112,53 @@ const writings = [
                 </section>
 
                 <!-- 写作列表 (Writing) -->
-                <section>
-                    <h2 class="text-sm font-bold text-gray-200 mb-6 uppercase tracking-wider">Writing</h2>
-                    <div class="space-y-0">
-                        {writings.map((post) => (
-                            <a href={post.url} class="group block py-3 border-t border-gray-800 hover:text-white transition flex justify-between items-baseline">
-                                <span class="text-gray-400 group-hover:text-white transition">{post.title}</span>
-                                <span class="text-gray-600 text-sm">{post.date}</span>
-                            </a>
-                        ))}
-                        <div class="pt-4">
-                            <a href="/blog" class="text-sm text-gray-500 hover:text-white underline decoration-gray-700 underline-offset-4">View all posts -></a>
-                        </div>
-                    </div>
-                </section>
+                <!-- 1. Homework 板块 -->
+<section class="mb-12">
+    <h2 class="text-sm font-bold text-gray-200 mb-6 uppercase tracking-wider">Homework</h2>
+    <div class="space-y-0">
+        {homeworkPosts.map((post) => (
+            <a href={`/homework/${post.slug}/`} class="group block py-3 border-t border-gray-800 hover:text-white transition flex justify-between items-baseline">
+                <span class="text-gray-400 group-hover:text-white transition">{post.data.title}</span>
+                <span class="text-gray-600 text-sm">{post.data.pubDate.toLocaleDateString()}</span>
+            </a>
+        ))}
+        <div class="pt-4 border-t border-gray-800">
+            <a href="/homework" class="text-sm text-gray-500 hover:text-white underline decoration-gray-700 underline-offset-4">View all homework -></a>
+        </div>
+    </div>
+</section>
+
+<!-- 2. Note 板块 -->
+<section class="mb-12">
+    <h2 class="text-sm font-bold text-gray-200 mb-6 uppercase tracking-wider">Notes</h2>
+    <div class="space-y-0">
+        {notePosts.map((post) => (
+            <a href={`/note/${post.slug}/`} class="group block py-3 border-t border-gray-800 hover:text-white transition flex justify-between items-baseline">
+                <span class="text-gray-400 group-hover:text-white transition">{post.data.title}</span>
+                <span class="text-gray-600 text-sm">{post.data.pubDate.toLocaleDateString()}</span>
+            </a>
+        ))}
+        <div class="pt-4 border-t border-gray-800">
+            <a href="/note" class="text-sm text-gray-500 hover:text-white underline decoration-gray-700 underline-offset-4">View all notes -></a>
+        </div>
+    </div>
+</section>
+
+<!-- 3. Blog 板块 -->
+<section class="mb-12">
+    <h2 class="text-sm font-bold text-gray-200 mb-6 uppercase tracking-wider">Blog</h2>
+    <div class="space-y-0">
+        {blogPosts.map((post) => (
+            <a href={`/blog/${post.slug}/`} class="group block py-3 border-t border-gray-800 hover:text-white transition flex justify-between items-baseline">
+                <span class="text-gray-400 group-hover:text-white transition">{post.data.title}</span>
+                <span class="text-gray-600 text-sm">{post.data.pubDate.toLocaleDateString()}</span>
+            </a>
+        ))}
+        <div class="pt-4 border-t border-gray-800">
+            <a href="/blog" class="text-sm text-gray-500 hover:text-white underline decoration-gray-700 underline-offset-4">View all posts -></a>
+        </div>
+    </div>
+</section>
 
 			</main>
 		</div>
