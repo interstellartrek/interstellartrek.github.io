@@ -15,12 +15,19 @@ const {
 	<head>
 		<BaseHead title={title} description={description} />
 	</head>
-	<body class="bg-[#111] font-sans text-gray-300 antialiased">
-		<div class="mx-auto grid max-w-screen-xl grid-cols-1 items-start gap-12 px-6 py-12 md:grid-cols-4 md:py-20">
+	<body class="font-sans text-gray-300 antialiased">
+		<div class="site-background" aria-hidden="true">
+			<video class="site-background__video" autoplay muted loop playsinline preload="metadata" poster="/black-hole-background-poster.png">
+				<source src="/black-hole-background.webm" type="video/webm" />
+			</video>
+			<div class="site-background__shade"></div>
+		</div>
+		<div class="site-content mx-auto grid max-w-screen-xl grid-cols-1 items-start gap-12 px-6 py-12 md:grid-cols-4 md:py-20">
 			<SiteSidebar active={active} />
 			<main class="min-w-0 md:col-span-3">
 				<slot />
 			</main>
 		</div>
+		<a class="background-credit" href="https://svs.gsfc.nasa.gov/13326/" target="_blank" rel="noreferrer">NASA Goddard / Jeremy Schnittman</a>
 	</body>
 </html>

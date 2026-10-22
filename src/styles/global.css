@@ -3,11 +3,64 @@
 @tailwind utilities;
 
 body {
-  background-color: #111111; /* 极深的灰色，比纯黑更有质感 */
+  min-height: 100vh;
+  background-color: #090b10;
   color: #e5e5e5;            /* 柔和的白色 */
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   /* 也就是 Tailwind 的 font-sans，看起来更像原网站 */
   -webkit-font-smoothing: antialiased; /* 让字体更清晰 */
+}
+
+.site-background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: #090b10 url('/black-hole-background-poster.png') center / cover no-repeat;
+}
+
+.site-background__video,
+.site-background__shade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.site-background__video {
+  object-fit: cover;
+  opacity: 0.58;
+}
+
+.site-background__shade {
+  background:
+    linear-gradient(90deg, rgba(7, 9, 14, 0.79), rgba(7, 9, 14, 0.55) 48%, rgba(7, 9, 14, 0.67)),
+    linear-gradient(0deg, rgba(7, 9, 14, 0.52), transparent 35%, rgba(7, 9, 14, 0.26));
+}
+
+.site-content {
+  position: relative;
+  z-index: 1;
+}
+
+.background-credit {
+  position: fixed;
+  right: 0.85rem;
+  bottom: 0.65rem;
+  z-index: 2;
+  color: rgba(229, 229, 229, 0.58);
+  font-size: 0.65rem;
+  letter-spacing: 0.02em;
+}
+
+.background-credit:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-background__video {
+    display: none;
+  }
 }
 
 /* 去掉默认的链接下划线，改成颜色变化 */
