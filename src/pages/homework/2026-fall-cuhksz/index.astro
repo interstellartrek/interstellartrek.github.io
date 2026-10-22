@@ -26,5 +26,6 @@ const posts = (await getCollection('homework'))
 				<p class="mt-2 text-sm text-gray-500">{post.data.description}</p>
 			</a>
 		))}
+		{posts.length === 0 && <p class="py-6 text-sm text-gray-500">Homework posts for this session will appear here.</p>}
 	</div>
 </SiteLayout>
