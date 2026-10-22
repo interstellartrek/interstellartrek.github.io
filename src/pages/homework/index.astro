@@ -1,33 +1,15 @@
 ---
-import { getCollection } from 'astro:content';
 import SiteLayout from '../../layouts/SiteLayout.astro';
-
-const posts = (await getCollection('homework')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+import { homeworkSections } from '../../data/homeworkSections';
 ---
 
 <SiteLayout title="Homework | Zehao Yu" active="homework">
 	<h1 class="mb-8 text-3xl font-bold tracking-tight text-white">Homework</h1>
-	<section class="mb-10 rounded-lg border border-gray-800 bg-white/[0.03] p-6">
-		<p class="mb-2 font-mono text-xs uppercase tracking-widest text-gray-500">Berkeley · Summer 2026</p>
-		<h2 class="text-xl font-semibold text-white">2026 Summer Berkeley</h2>
-		<p class="mt-2 text-sm text-gray-400">Course homework for abstract algebra and abstract linear algebra.</p>
-		<div class="mt-5 flex flex-wrap gap-3">
-			<a href="/homework/2026-summer-berkeley/" class="rounded border border-gray-700 px-4 py-2 text-sm text-gray-200 transition hover:border-gray-500 hover:text-white">Browse courses →</a>
-		</div>
-	</section>
-	<h2 class="mb-4 text-lg font-semibold text-gray-300">Other homework posts</h2>
 	<div class="border-t border-gray-800">
-		{posts.map((post) => (
-			<a href={`/homework/${post.slug}/`} class="group -mx-6 block border-b border-gray-800 px-6 py-6 transition hover:bg-white/5">
-				<div class="flex flex-col gap-2 md:flex-row md:items-baseline md:justify-between">
-					<h2 class="text-lg font-medium text-gray-200 transition group-hover:text-white">{post.data.title}</h2>
-					<time class="shrink-0 font-mono text-sm text-gray-600">
-						{post.data.pubDate.toLocaleDateString('en-us', { year: 'numeric', month: 'short', day: 'numeric' })}
-					</time>
-				</div>
-				<p class="mt-2 text-sm text-gray-500">{post.data.description}</p>
+		{homeworkSections.map((section) => (
+			<a href={section.href} class="group -mx-6 flex items-center justify-between border-b border-gray-800 px-6 py-6 transition hover:bg-white/5">
+				<h2 class="text-lg font-medium text-gray-200 transition group-hover:text-white">{section.title}</h2>
+				<span class="text-gray-600 transition group-hover:translate-x-1 group-hover:text-gray-300">→</span>
 			</a>
 		))}
 	</div>

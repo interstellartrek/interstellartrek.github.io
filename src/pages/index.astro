@@ -2,11 +2,11 @@
 import { getCollection } from 'astro:content';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { homeworkSections } from '../data/homeworkSections';
 
 const latest = (collection) =>
 	collection.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0, 3);
 
-const homeworkPosts = latest(await getCollection('homework'));
 const notePosts = latest(await getCollection('note'));
 const blogPosts = latest(await getCollection('blog'));
 const projects = [
@@ -55,9 +55,10 @@ const projects = [
 				<a href="/homework/" class="text-sm text-gray-500 hover:text-white">All homework →</a>
 			</div>
 			<div class="border-t border-gray-800">
-				{homeworkPosts.map((post) => (
-					<a href={`/homework/${post.slug}/`} class="flex justify-between gap-4 border-b border-gray-800 py-3 text-gray-400 transition hover:text-white">
-						<span>{post.data.title}</span><time class="shrink-0 text-sm text-gray-600">{post.data.pubDate.toLocaleDateString()}</time>
+				{homeworkSections.map((section) => (
+					<a href={section.href} class="group flex items-center justify-between gap-4 border-b border-gray-800 py-4 text-gray-300 transition hover:text-white">
+						<h3 class="text-base font-medium">{section.title}</h3>
+						<span class="text-gray-600 transition group-hover:translate-x-1 group-hover:text-gray-300">→</span>
 					</a>
 				))}
 			</div>
