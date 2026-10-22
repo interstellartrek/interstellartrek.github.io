@@ -1,62 +1,42 @@
-# Astro Starter Kit: Blog
+# Zehao's Blog
 
-```sh
-npm create astro@latest -- --template blog
-```
+This is the source for [interstellartrek.github.io](https://interstellartrek.github.io), built with Astro and deployed to GitHub Pages whenever `main` is updated.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Write and publish a post
 
-Features:
+1. Create a post with a short, lowercase URL slug:
 
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
+   ```sh
+   npm run new:post -- my-new-post
+   ```
 
-## 🚀 Project Structure
+   This creates `src/content/blog/my-new-post.md` with the required frontmatter and today's publication date.
 
-Inside of your Astro project, you'll see the following folders and files:
+2. Edit the title, description, and article body. The required fields are `title`, `description`, and `pubDate`. To change the publication date, use `YYYY-MM-DD`. Markdown and MDX posts are supported.
 
-```text
-├── public/
-├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
-```
+3. To add a cover image, put it in `src/assets/` and add a `heroImage` field using a path relative to the post, for example:
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+   ```yaml
+   heroImage: '../../assets/my-cover.jpg'
+   ```
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+4. Preview locally with `npm run dev`, then build the production site with `npm run build`.
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+5. Commit and push to `main` with lazygit, or run:
 
-Any static assets, like images, can be placed in the `public/` directory.
+   ```sh
+   git add src/content/blog/my-new-post.md
+   git commit -m "Add my new post"
+   git push
+   ```
 
-## 🧞 Commands
+GitHub Actions builds and deploys the site after the push. Posts appear in `/blog/` and the RSS feed.
 
-All commands are run from the root of the project, from a terminal:
+## Other commands
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-## Credit
-
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+| Command | Purpose |
+| --- | --- |
+| `npm install` | Install dependencies |
+| `npm run dev` | Start the local site at `http://localhost:4321` |
+| `npm run build` | Build the production site in `dist/` |
+| `npm run preview` | Preview the production build |

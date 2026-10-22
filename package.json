@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "new:post": "node scripts/new-post.js",
     "preview": "astro preview",
     "astro": "astro"
   },
