@@ -2,7 +2,16 @@
 
 This is the source for [interstellartrek.github.io](https://interstellartrek.github.io), built with Astro and deployed to GitHub Pages whenever `main` is updated.
 
-## Write and publish a post
+## Content sections
+
+- `src/content/blog/` is for regular blog posts. Write these in Markdown or MDX; the `markdown-style-guide.md` post shows the preferred format.
+- `src/content/homework/` is for homework posts.
+- `src/content/note/` is for notes.
+- Mathematical papers and long-form math work should be added as PDFs under `public/pdfs/` and embedded or linked from a Markdown post. For example, use `<iframe src="/pdfs/my-paper.pdf" title="My paper" width="100%" height="800"></iframe>` or `[Read the PDF](/pdfs/my-paper.pdf)`.
+
+The site-wide sidebar links directly to Home, About, Homework, Note, Blog, and Projects.
+
+## Write and publish a blog post
 
 1. Create a post with a short, lowercase URL slug:
 
@@ -30,7 +39,7 @@ This is the source for [interstellartrek.github.io](https://interstellartrek.git
    git push
    ```
 
-GitHub Actions builds and deploys the site after the push. Posts appear in `/blog/` and the RSS feed.
+GitHub Actions builds and deploys the site after the push. Blog posts appear in `/blog/` and the RSS feed. Homework and notes use the matching content folders and page URLs.
 
 ## Other commands
 

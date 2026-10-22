@@ -1,0 +1,44 @@
+---
+const { active = '' } = Astro.props;
+
+const links = [
+	{ label: 'Home', href: '/', key: 'home' },
+	{ label: 'About', href: '/about/', key: 'about' },
+	{ label: 'Homework', href: '/homework/', key: 'homework' },
+	{ label: 'Note', href: '/note/', key: 'note' },
+	{ label: 'Blog', href: '/blog/', key: 'blog' },
+	{ label: 'Projects', href: '/projects/', key: 'projects' },
+];
+---
+
+<aside class="space-y-8 md:col-span-1 md:sticky md:top-12">
+	<div>
+		<a href="/" aria-label="Zehao Yu home" class="inline-block">
+			<img
+				src="https://github.com/interstellartrek.png?size=256"
+				alt="Zehao Yu"
+				width="64"
+				height="64"
+				class="mb-4 h-16 w-16 rounded-full object-cover grayscale transition duration-500 hover:grayscale-0"
+			/>
+		</a>
+		<p class="text-xl font-bold tracking-tight text-white">Zehao Yu</p>
+		<p class="mt-1 font-mono text-sm text-gray-500">interstellartrek</p>
+	</div>
+
+	<nav aria-label="Main navigation">
+		<ul class="space-y-2 text-sm font-medium">
+			{links.map(({ label, href, key }) => (
+				<li>
+					<a
+						href={href}
+						aria-current={active === key ? 'page' : undefined}
+						class={active === key ? 'text-white' : 'text-gray-500 transition hover:text-white'}
+					>
+						{label}
+					</a>
+				</li>
+			))}
+		</ul>
+	</nav>
+</aside>

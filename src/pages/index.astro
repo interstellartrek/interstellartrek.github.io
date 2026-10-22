@@ -1,166 +1,94 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-
-// 模拟一些项目数据（你可以改成你真实的）
-const projects = [
-  { name: "Personal Website", desc: "Built with Astro & Tailwind", year: "2026", url: "#" },
-  { name: "Achievement System", desc: "Tracking life goals", year: "2025", url: "#" },
-  { name: "Deep Learning Demo", desc: "Pytorch experiments", year: "2024", url: "#" },
-];
-
-// 模拟一些文章数据
-
 import { getCollection } from 'astro:content';
-// ... 其他 import ...
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
-// 获取 homework 板块最新的 3 篇文章
-const homeworkPosts = (await getCollection('homework'))
-    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-    .slice(0, 3);
+const latest = (collection) =>
+	collection.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0, 3);
 
-// 获取 note 板块最新的 3 篇文章
-const notePosts = (await getCollection('note'))
-    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-    .slice(0, 3);
-
-// 获取 blog 板块最新的 3 篇文章
-const blogPosts = (await getCollection('blog'))
-    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-    .slice(0, 3);
-
+const homeworkPosts = latest(await getCollection('homework'));
+const notePosts = latest(await getCollection('note'));
+const blogPosts = latest(await getCollection('blog'));
+const projects = [
+	{ name: 'Personal Website', description: 'Built with Astro and Tailwind CSS', year: '2026', url: 'https://github.com/interstellartrek/interstellartrek.github.io' },
+	{ name: 'Achievement System', description: 'A personal system for tracking life goals', year: '2025', url: '#' },
+	{ name: 'Deep Learning Demo', description: 'Experiments with machine learning', year: '2024', url: '#' },
+];
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body class="bg-[#111] text-gray-300 antialiased">
-        
-        <!-- 核心布局：大屏幕双栏，小屏幕单栏 -->
-		<div class="max-w-screen-xl mx-auto px-6 py-12 md:py-20 grid grid-cols-1 md:grid-cols-4 gap-12">
-			
-            <!-- 左侧边栏 (Sidebar) -->
-			<aside class="md:col-span-1 space-y-8">
-                <!-- 头像与名字 -->
-				<div>
-                    <div class="w-16 h-16 rounded-full overflow-hidden mb-4 grayscale hover:grayscale-0 transition duration-500">
-                        <!-- 请替换成你的头像链接 -->
-					    <img src="https://github.com/interstellartrek.png" alt="Avatar" class="w-full h-full object-cover" />
-                    </div>
-					<h1 class="text-xl font-bold text-white tracking-tight">Zehao Yu</h1>
-                    <p class="text-gray-500 text-sm mt-1">interstellartrek</p>
-				</div>
+<SiteLayout title={SITE_TITLE} description={SITE_DESCRIPTION} active="home">
+	<div class="space-y-16">
+		<section class="max-w-2xl">
+			<p class="mb-6 text-lg leading-relaxed text-gray-300">
+				Hello, I'm a student at the Chinese University of Hong Kong, Shenzhen. I enjoy mathematics and exploring the frontiers of AI.
+			</p>
+			<p class="leading-relaxed text-gray-400">
+				I'm currently focusing on <span class="text-white">mathematical analysis</span> and <span class="text-white">algebraic geometry</span>. This site is my digital garden for sharing what I learn.
+			</p>
+			<div class="mt-6 flex items-center gap-2 text-sm text-gray-500">
+				<span class="relative flex h-2 w-2">
+					<span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
+					<span class="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
+				</span>
+				Open to collaborations
+			</div>
+		</section>
 
-                <!-- 导航菜单 -->
-                <nav>
-                    <ul class="space-y-2 text-sm text-gray-500 font-medium">
-                        <li><a href="/" class="text-white">Home</a></li>
-                        <li><a href="/about" class="hover:text-white transition">About</a></li>
-                        <li><a href="/blog" class="hover:text-white transition">Writing</a></li>
-                        <li><a href="https://github.com" target="_blank" class="hover:text-white transition">Projects</a></li>
-                    </ul>
-                </nav>
+		<section>
+			<h2 class="mb-6 text-sm font-bold uppercase tracking-wider text-gray-200">Selected Projects</h2>
+			<div>
+				{projects.map((project) => (
+					<a href={project.url} class="group -mx-4 block rounded-lg border-t border-gray-800 px-4 py-4 transition hover:bg-white/5">
+						<div class="flex items-baseline justify-between">
+							<h3 class="font-medium text-gray-200 transition group-hover:text-white">{project.name}</h3>
+							<span class="font-mono text-sm text-gray-600">{project.year}</span>
+						</div>
+						<p class="mt-1 text-sm text-gray-500">{project.description}</p>
+					</a>
+				))}
+			</div>
+		</section>
 
-                <!-- 社交链接 -->
-                <div class="space-y-2 text-sm text-gray-500">
-                    <p class="text-xs font-bold text-gray-600 uppercase tracking-wider mb-2">Socials</p>
-                    <ul class="space-y-1">
-                        <li><a href="https://github.com/interstellartrek" class="hover:text-white transition flex items-center gap-2">GitHub ↗</a></li>
-                        <li><a href="https://twitter.com/你的推特" class="hover:text-white transition flex items-center gap-2">Twitter ↗</a></li>
-                        <li><a href="mailto:125090888@link.cuhk.edu.cn" class="hover:text-white transition flex items-center gap-2">Email ↗</a></li>
-                    </ul>
-                </div>
-			</aside>
+		<section>
+			<div class="mb-6 flex items-center justify-between">
+				<h2 class="text-sm font-bold uppercase tracking-wider text-gray-200">Homework</h2>
+				<a href="/homework/" class="text-sm text-gray-500 hover:text-white">All homework →</a>
+			</div>
+			<div class="border-t border-gray-800">
+				{homeworkPosts.map((post) => (
+					<a href={`/homework/${post.slug}/`} class="flex justify-between gap-4 border-b border-gray-800 py-3 text-gray-400 transition hover:text-white">
+						<span>{post.data.title}</span><time class="shrink-0 text-sm text-gray-600">{post.data.pubDate.toLocaleDateString()}</time>
+					</a>
+				))}
+			</div>
+		</section>
 
-            <!-- 右侧主要内容 (Main Content) -->
-			<main class="md:col-span-3 space-y-16">
-				
-                <!-- 简介部分 -->
-				<section class="max-w-2xl">
-					<p class="text-lg leading-relaxed text-gray-300 mb-6">
-						Hello, I'm a student in Chinese University of HongKong. I love playing with math and exploring the frontiers of AI. 
-					</p>
-                    <p class="text-gray-400 leading-relaxed">
-                        Currently, I'm focusing on <span class="text-white">Mathematical Analysis</span> and <span class="text-white">Algebraic Geometry</span>. This website serves as my digital garden where I document my achievements and learning process.
-                    </p>
-                    <!-- 动态状态指示器 -->
-                    <div class="mt-6 flex items-center gap-2 text-sm text-gray-500">
-                        <span class="relative flex h-2 w-2">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                        </span>
-                        Open to collaborations
-                    </div>
-				</section>
+		<section>
+			<div class="mb-6 flex items-center justify-between">
+				<h2 class="text-sm font-bold uppercase tracking-wider text-gray-200">Note</h2>
+				<a href="/note/" class="text-sm text-gray-500 hover:text-white">All notes →</a>
+			</div>
+			<div class="border-t border-gray-800">
+				{notePosts.map((post) => (
+					<a href={`/note/${post.slug}/`} class="flex justify-between gap-4 border-b border-gray-800 py-3 text-gray-400 transition hover:text-white">
+						<span>{post.data.title}</span><time class="shrink-0 text-sm text-gray-600">{post.data.pubDate.toLocaleDateString()}</time>
+					</a>
+				))}
+			</div>
+		</section>
 
-                <!-- 选定项目 (Selected Projects) - 复刻原站的列表风格 -->
-                <section>
-                    <h2 class="text-sm font-bold text-gray-200 mb-6 uppercase tracking-wider">Selected Projects</h2>
-                    <div class="space-y-0">
-                        {projects.map((project) => (
-                            <a href={project.url} class="group block py-4 border-t border-gray-800 hover:bg-white/5 transition -mx-4 px-4 rounded-lg">
-                                <div class="flex justify-between items-baseline">
-                                    <h3 class="font-medium text-gray-200 group-hover:text-white transition">{project.name}</h3>
-                                    <span class="text-gray-600 text-sm font-mono">{project.year}</span>
-                                </div>
-                                <p class="text-sm text-gray-500 mt-1">{project.desc}</p>
-                            </a>
-                        ))}
-                    </div>
-                </section>
-
-                <!-- 写作列表 (Writing) -->
-                <!-- 1. Homework 板块 -->
-<section class="mb-12">
-    <h2 class="text-sm font-bold text-gray-200 mb-6 uppercase tracking-wider">Homework</h2>
-    <div class="space-y-0">
-        {homeworkPosts.map((post) => (
-            <a href={`/homework/${post.slug}/`} class="group block py-3 border-t border-gray-800 hover:text-white transition flex justify-between items-baseline">
-                <span class="text-gray-400 group-hover:text-white transition">{post.data.title}</span>
-                <span class="text-gray-600 text-sm">{post.data.pubDate.toLocaleDateString()}</span>
-            </a>
-        ))}
-        <div class="pt-4 border-t border-gray-800">
-            <a href="/homework" class="text-sm text-gray-500 hover:text-white underline decoration-gray-700 underline-offset-4">View all homework -></a>
-        </div>
-    </div>
-</section>
-
-<!-- 2. Note 板块 -->
-<section class="mb-12">
-    <h2 class="text-sm font-bold text-gray-200 mb-6 uppercase tracking-wider">Notes</h2>
-    <div class="space-y-0">
-        {notePosts.map((post) => (
-            <a href={`/note/${post.slug}/`} class="group block py-3 border-t border-gray-800 hover:text-white transition flex justify-between items-baseline">
-                <span class="text-gray-400 group-hover:text-white transition">{post.data.title}</span>
-                <span class="text-gray-600 text-sm">{post.data.pubDate.toLocaleDateString()}</span>
-            </a>
-        ))}
-        <div class="pt-4 border-t border-gray-800">
-            <a href="/note" class="text-sm text-gray-500 hover:text-white underline decoration-gray-700 underline-offset-4">View all notes -></a>
-        </div>
-    </div>
-</section>
-
-<!-- 3. Blog 板块 -->
-<section class="mb-12">
-    <h2 class="text-sm font-bold text-gray-200 mb-6 uppercase tracking-wider">Blog</h2>
-    <div class="space-y-0">
-        {blogPosts.map((post) => (
-            <a href={`/blog/${post.slug}/`} class="group block py-3 border-t border-gray-800 hover:text-white transition flex justify-between items-baseline">
-                <span class="text-gray-400 group-hover:text-white transition">{post.data.title}</span>
-                <span class="text-gray-600 text-sm">{post.data.pubDate.toLocaleDateString()}</span>
-            </a>
-        ))}
-        <div class="pt-4 border-t border-gray-800">
-            <a href="/blog" class="text-sm text-gray-500 hover:text-white underline decoration-gray-700 underline-offset-4">View all posts -></a>
-        </div>
-    </div>
-</section>
-
-			</main>
-		</div>
-	</body>
-</html>
+		<section>
+			<div class="mb-6 flex items-center justify-between">
+				<h2 class="text-sm font-bold uppercase tracking-wider text-gray-200">Blog</h2>
+				<a href="/blog/" class="text-sm text-gray-500 hover:text-white">All posts →</a>
+			</div>
+			<div class="border-t border-gray-800">
+				{blogPosts.map((post) => (
+					<a href={`/blog/${post.slug}/`} class="flex justify-between gap-4 border-b border-gray-800 py-3 text-gray-400 transition hover:text-white">
+						<span>{post.data.title}</span><time class="shrink-0 text-sm text-gray-600">{post.data.pubDate.toLocaleDateString()}</time>
+					</a>
+				))}
+			</div>
+		</section>
+	</div>
+</SiteLayout>

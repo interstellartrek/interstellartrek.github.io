@@ -1,0 +1,26 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import SiteSidebar from '../components/SiteSidebar.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+const {
+	title = SITE_TITLE,
+	description = SITE_DESCRIPTION,
+	active = '',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+	</head>
+	<body class="bg-[#111] font-sans text-gray-300 antialiased">
+		<div class="mx-auto grid max-w-screen-xl grid-cols-1 items-start gap-12 px-6 py-12 md:grid-cols-4 md:py-20">
+			<SiteSidebar active={active} />
+			<main class="min-w-0 md:col-span-3">
+				<slot />
+			</main>
+		</div>
+	</body>
+</html>
