@@ -28,7 +28,11 @@ description: 'Write a short summary of this post.'
 pubDate: '${date}'
 ---
 
-Start writing here.
+Write an opening paragraph that introduces the topic.
+
+## Section title
+
+Develop the main idea here. Use Markdown headings and sections to keep the post easy to read, following the style of the Markdown Style Guide post.
 `;
 
 mkdirSync(postsDirectory, { recursive: true });

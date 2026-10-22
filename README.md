@@ -7,7 +7,8 @@ This is the source for [interstellartrek.github.io](https://interstellartrek.git
 - `src/content/blog/` is for regular blog posts. Write these in Markdown or MDX; the `markdown-style-guide.md` post shows the preferred format.
 - `src/content/homework/` is for homework posts.
 - `src/content/note/` is for notes.
-- Mathematical papers and long-form math work should be added as PDFs under `public/pdfs/` and embedded or linked from a Markdown post. For example, use `<iframe src="/pdfs/my-paper.pdf" title="My paper" width="100%" height="800"></iframe>` or `[Read the PDF](/pdfs/my-paper.pdf)`.
+- PDF posts should place their files under `public/pdfs/` and embed them with the shared `PdfViewer` component, as in the Basis for Infinite post. Use the same component to show homework PDFs in course pages.
+- Text blog posts should use clear Markdown sections and headings, following the form of the Markdown Style Guide post.
 
 The site-wide sidebar links directly to Home, About, Homework, Note, Blog, and Projects.
 
@@ -21,7 +22,7 @@ The site-wide sidebar links directly to Home, About, Homework, Note, Blog, and P
 
    This creates `src/content/blog/my-new-post.md` with the required frontmatter and today's publication date.
 
-2. Edit the title, description, and article body. The required fields are `title`, `description`, and `pubDate`. To change the publication date, use `YYYY-MM-DD`. Markdown and MDX posts are supported.
+2. Edit the title, description, and article body. The required fields are `title`, `description`, and `pubDate`. To change the publication date, use `YYYY-MM-DD`. Markdown and MDX posts are supported. Structure text posts with an introduction and readable Markdown sections, following the Markdown Style Guide.
 
 3. To add a cover image, put it in `src/assets/` and add a `heroImage` field using a path relative to the post, for example:
 
