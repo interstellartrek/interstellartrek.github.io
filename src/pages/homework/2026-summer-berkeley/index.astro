@@ -1,0 +1,36 @@
+---
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+
+const courses = [
+	{
+		code: 'aa',
+		title: 'MATH 113 · Abstract Algebra',
+		description: 'Abstract algebra homework assignments.',
+	},
+	{
+		code: 'ala',
+		title: 'MATH 110 · Abstract Linear Algebra',
+		description: 'Abstract linear algebra homework assignments.',
+	},
+];
+---
+
+<SiteLayout title="2026 Summer Berkeley | Homework | Zehao Yu" active="homework">
+	<nav class="mb-6 text-sm text-gray-500" aria-label="Breadcrumb">
+		<a href="/homework/" class="hover:text-white">Homework</a>
+		<span class="mx-2">/</span>
+		<span class="text-gray-300">2026 Summer Berkeley</span>
+	</nav>
+	<h1 class="mb-3 text-3xl font-bold tracking-tight text-white">2026 Summer Berkeley</h1>
+	<p class="mb-8 text-gray-400">Choose a course to browse its homework PDFs.</p>
+	<div class="grid gap-4 sm:grid-cols-2">
+		{courses.map((course) => (
+			<a href={`/homework/2026-summer-berkeley/${course.code}/`} class="group rounded-lg border border-gray-800 p-6 transition hover:border-gray-600 hover:bg-white/[0.03]">
+				<p class="mb-3 font-mono text-xs uppercase tracking-widest text-gray-500">{course.code}</p>
+				<h2 class="text-lg font-semibold text-gray-100 transition group-hover:text-white">{course.title}</h2>
+				<p class="mt-2 text-sm text-gray-500">{course.description}</p>
+				<p class="mt-5 text-sm text-gray-400">View assignments →</p>
+			</a>
+		))}
+	</div>
+</SiteLayout>
