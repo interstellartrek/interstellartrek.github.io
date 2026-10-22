@@ -11,8 +11,8 @@ const notePosts = latest(await getCollection('note'));
 const blogPosts = latest(await getCollection('blog'));
 const projects = [
 	{ name: 'Personal Website', description: 'Built with Astro and Tailwind CSS', year: '2026', url: 'https://github.com/interstellartrek/interstellartrek.github.io' },
-	{ name: 'Achievement System', description: 'A personal system for tracking life goals', year: '2025', url: '#' },
-	{ name: 'Deep Learning Demo', description: 'Experiments with machine learning', year: '2024', url: '#' },
+	{ name: 'Lie-Theory', description: 'Mathematical work and notes on Lie theory', url: 'https://github.com/interstellartrek/Lie-Theory' },
+	{ name: 'Algebraic Number Theory', description: 'Mathematical work and notes on algebraic number theory', url: 'https://github.com/interstellartrek/Algebraic-Number-theory' },
 ];
 ---
 
@@ -41,7 +41,7 @@ const projects = [
 					<a href={project.url} class="group -mx-4 block rounded-lg border-t border-gray-800 px-4 py-4 transition hover:bg-white/5">
 						<div class="flex items-baseline justify-between">
 							<h3 class="font-medium text-gray-200 transition group-hover:text-white">{project.name}</h3>
-							<span class="font-mono text-sm text-gray-600">{project.year}</span>
+							{project.year && <span class="font-mono text-sm text-gray-600">{project.year}</span>}
 						</div>
 						<p class="mt-1 text-sm text-gray-500">{project.description}</p>
 					</a>

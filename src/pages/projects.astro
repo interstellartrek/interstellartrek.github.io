@@ -4,8 +4,8 @@ import { SITE_TITLE } from '../consts';
 
 const projects = [
 	{ name: 'Achievement System', description: 'A personal website built with Astro and Tailwind CSS to track life achievements.', year: '2026', url: 'https://github.com/interstellartrek/interstellartrek.github.io', tag: 'Web Dev' },
-	{ name: 'Physics Engine Demo', description: 'A simple 2D physics simulation written in Python.', year: '2025', url: '#', tag: 'Python' },
-	{ name: 'AI Chatbot', description: 'Experiments with fine-tuning language models.', year: '2024', url: '#', tag: 'AI' },
+	{ name: 'Lie-Theory', description: 'Mathematical work and notes on Lie theory.', url: 'https://github.com/interstellartrek/Lie-Theory', tag: 'Mathematics' },
+	{ name: 'Algebraic Number Theory', description: 'Mathematical work and notes on algebraic number theory.', url: 'https://github.com/interstellartrek/Algebraic-Number-theory', tag: 'Mathematics' },
 ];
 ---
 
@@ -17,8 +17,8 @@ const projects = [
 				<div class="mb-2 flex flex-col gap-2 md:flex-row md:items-baseline md:justify-between">
 					<h2 class="text-xl font-bold text-gray-200 transition group-hover:text-white">{project.name}</h2>
 					<div class="flex items-center gap-3">
-						<span class="rounded border border-green-900 bg-green-900/20 px-2 py-0.5 font-mono text-xs text-green-500">{project.tag}</span>
-						<span class="font-mono text-sm text-gray-500">{project.year}</span>
+						{project.tag && <span class="rounded border border-green-900 bg-green-900/20 px-2 py-0.5 font-mono text-xs text-green-500">{project.tag}</span>}
+						{project.year && <span class="font-mono text-sm text-gray-500">{project.year}</span>}
 					</div>
 				</div>
 				<p class="text-gray-400 group-hover:text-gray-300">{project.description}</p>
