@@ -1,0 +1,49 @@
+---
+import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import PdfViewer from '../../../../components/PdfViewer.astro';
+
+const materials = [
+	{
+		file: 'MAT5210_HW2_Solutions.pdf',
+		title: 'Homework 2 Solutions',
+	},
+	{
+		file: 'MAT5210_HW3_Solutions.pdf',
+		title: 'Homework 3 Solutions',
+	},
+	{
+		file: 'MAT5210_Midterm_Sample_Solutions.pdf',
+		title: 'Midterm Sample Solutions',
+	},
+];
+
+const pdfPath = (file: string) => `/pdfs/2026-fall-cuhksz/mat5210/${file}`;
+---
+
+<SiteLayout title="MAT5210 · Galois Theory and Algebraic Number Theory | Homework | Zehao Yu" active="homework">
+	<nav class="mb-6 text-sm text-gray-500" aria-label="Breadcrumb">
+		<a href="/homework/" class="hover:text-white">Homework</a>
+		<span class="mx-2">/</span>
+		<a href="/homework/2026-fall-cuhksz/" class="hover:text-white">2026 Fall CUHKSZ</a>
+		<span class="mx-2">/</span>
+		<span class="text-gray-300">MAT5210</span>
+	</nav>
+	<p class="mb-2 font-mono text-xs uppercase tracking-widest text-gray-500">MAT5210</p>
+	<h1 class="mb-3 text-3xl font-bold tracking-tight text-white">Galois Theory and Algebraic Number Theory</h1>
+	<p class="mb-8 text-gray-400">Homework and exam solution PDFs</p>
+	<div class="space-y-4">
+		{materials.map((material) => (
+			<details class="group rounded-lg border border-gray-800 p-5 open:bg-white/[0.02]">
+				<summary class="cursor-pointer list-none text-gray-200 transition hover:text-white">
+					<span class="flex items-center justify-between gap-4">
+						<span>{material.title}</span>
+						<span class="font-mono text-xs text-gray-500">PDF · <span class="group-open:hidden">Show</span><span class="hidden group-open:inline">Hide</span></span>
+					</span>
+				</summary>
+				<div class="mt-5">
+					<PdfViewer src={pdfPath(material.file)} title={`MAT5210 ${material.title}`} />
+				</div>
+			</details>
+		))}
+	</div>
+</SiteLayout>

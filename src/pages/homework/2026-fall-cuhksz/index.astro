@@ -14,6 +14,15 @@ const posts = (await getCollection('homework'))
 		<span class="text-gray-300">2026 Fall CUHKSZ</span>
 	</nav>
 	<h1 class="mb-8 text-3xl font-bold tracking-tight text-white">2026 Fall CUHKSZ</h1>
+	<section class="mb-10" aria-labelledby="fall-courses-heading">
+		<h2 id="fall-courses-heading" class="mb-4 text-xs font-semibold uppercase tracking-widest text-gray-500">Courses</h2>
+		<a href="/homework/2026-fall-cuhksz/mat5210/" class="group block rounded-lg border border-gray-800 p-6 transition hover:border-gray-600 hover:bg-white/[0.03]">
+			<p class="mb-3 font-mono text-xs uppercase tracking-widest text-gray-500">MAT5210</p>
+			<h3 class="text-lg font-semibold text-gray-100 transition group-hover:text-white">Galois Theory and Algebraic Number Theory</h3>
+			<p class="mt-2 text-sm text-gray-500">Homework and exam solution PDFs.</p>
+			<p class="mt-5 text-sm text-gray-400">View materials →</p>
+		</a>
+	</section>
 	<div class="border-t border-gray-800">
 		{posts.map((post) => (
 			<a href={`/homework/${post.slug}/`} class="group -mx-6 block border-b border-gray-800 px-6 py-6 transition hover:bg-white/5">
